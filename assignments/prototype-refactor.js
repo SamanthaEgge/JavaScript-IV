@@ -50,7 +50,7 @@ class GameObject {
   
 class CharacterStats extends GameObject{
     constructor ({healthPoints, speedStat, damageStat, ...attributes}) {
-        super(attributes)
+        super(attributes);
         this.healthPoints = healthPoints;
         this.speedStat = speedStat;
         this.damageStat = damageStat;
