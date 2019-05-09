@@ -28,7 +28,7 @@ Prototype Refactor
 */
 
 class GameObject {
-    constructor(createdAt, name, dimensions) {
+    constructor({createdAt, name, dimensions}) {
         this.createdAt = createdAt;
         this.name = name;
         this.dimensions = dimensions;
@@ -49,8 +49,8 @@ class GameObject {
   */
   
 class CharacterStats extends GameObject{
-    constructor (healthPoints, speedStat, damageStat) {
-        super(createdAt, name, dimensions)
+    constructor ({healthPoints, speedStat, damageStat, ...attributes}) {
+        super(attributes)
         this.healthPoints = healthPoints;
         this.speedStat = speedStat;
         this.damageStat = damageStat;
@@ -58,7 +58,7 @@ class CharacterStats extends GameObject{
 
     takeDamage () {
         return `${this.name} took damage.`
-      }
+    }
     
 }
 
@@ -73,8 +73,8 @@ class CharacterStats extends GameObject{
     * should inherit takeDamage() from CharacterStats
   */
 class Humanoid extends CharacterStats {
-    constructor (team, weapons, language) {
-        super(healthPoints, speedStat, damageStat);
+    constructor ({team, weapons, language, ...attributes}) {
+        super(attributes);
         this.team = team;
         this.weapons = weapons;
         this.language = language;
@@ -93,20 +93,20 @@ class Humanoid extends CharacterStats {
   */
   //------Villain Prototype------
 
-// class Villain extends Humanoid {
-//     constructor (evilLaugh) {
-//         super(team, weapons, language);
-//         this.evilLaugh = evilLaugh;
-//     }
-// };
+class Villain extends Humanoid {
+    constructor ({evilLaugh, ...attributes}) {
+        super(attributes);
+        this.evilLaugh = evilLaugh;
+    }
+};
  
 
-// class Hero extends Humanoid {
-//     constructor (cape) {
-//         super(team, weapons, language);
-//         this.cape = cape;
-//     }
-// }
+class Hero extends Humanoid {
+    constructor ({cape, ...attributes}) {
+        super(attributes);
+        this.cape = cape;
+    }
+}
   
   
   function battle (object1, object2) {
@@ -145,41 +145,42 @@ class Humanoid extends CharacterStats {
   
   // Test you work by un-commenting these 3 objects and the list of console logs below:
   
-    // const hero = new Hero({
-    //   createdAt: new Date(),
-    //   dimensions: {
-    //     length: 2,
-    //     width: 1,
-    //     height: 1,
-    //   },
-    //   healthPoints: 50,
-    //   speedStat: 7,
-    //   name: 'The Phoenix',
-    //   team: 'None',
-    //   weapons: [
-    //     'Staff of Shamalama',
-    //   ],
-    //   language: 'Common Tongue',
-    //   cape: 'No capes'
-    // })
+    const hero = new Hero({
+      createdAt: new Date(),
+      dimensions: {
+        length: 2,
+        width: 1,
+        height: 1,
+      },
+      healthPoints: 50,
+      speedStat: 7,
+      name: 'The Phoenix',
+      team: 'None',
+      weapons: [
+        'Staff of Shamalama',
+      ],
+      language: 'Common Tongue',
+      cape: 'No capes'
+    })
   
-    // const villian = new Villain({
-    //   createdAt: new Date(),
-    //   dimensions: {
-    //     length: 2,
-    //     width: 1,
-    //     height: 1,
-    //   },
-    //   healthPoints: 50,
-    //   speedStat: 5,
-    //   name: 'Bruce',
-    //   team: 'Thieves Guild',
-    //   weapons: [
-    //     'Staff of Shamalama',
-    //   ],
-    //   language: 'Common Tongue',
-    //   evilLaugh: 'Muhahahaha'
-    // })
+    const villian = new Villain({
+      createdAt: new Date(),
+      dimensions: {
+        length: 2,
+        width: 1,
+        height: 1,
+      },
+      healthPoints: 50,
+      speedStat: 5,
+      name: 'Bruce',
+      team: 'Thieves Guild',
+      weapons: [
+        'Staff of Shamalama',
+      ],
+      language: 'Common Tongue',
+      evilLaugh: 'Muhahahaha'
+    })
+    console.log(hero);
   
     const mage = new Humanoid({
       createdAt: new Date(),
@@ -188,7 +189,7 @@ class Humanoid extends CharacterStats {
         width: 1,
         height: 1,
       },
-      healthPoints: 5,
+//      healthPoints: 5,
       name: 'Bruce',
       team: 'Mage Guild',
       weapons: [
