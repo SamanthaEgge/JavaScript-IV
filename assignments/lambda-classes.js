@@ -60,11 +60,11 @@ class Instructor extends Person {
     }
     
     demo (subject) {
-        `Today we are learning about ${subject}.`
+        return `Today we are learning about ${subject}.`
     }
 
     grade (student, subject) {
-        `${student.name} receives a perfect score on ${subject}.`
+        return `${student.name} receives a perfect score on ${subject}.`
     }
 }
 
@@ -90,11 +90,11 @@ class Student extends Person {
     }
 
     listsSubjects (student) {
-        `Favorite Subjects: ${student.favSubjects}`
+        return `Favorite Subjects: ${student.favSubjects}`
     }
 
-    PRAssignment (student) {
-        `${student.name} has submitted a PR for ${subject}`
+    PRAssignment (student, subject) {
+        return `${student.name} has submitted a PR for ${subject}`
     }
 }
 
@@ -117,14 +117,54 @@ class ProjectManager extends Instructor {
     }
 
     standUp (channel) {
-        `${this.name} announces to ${channel}, @channel standy times.`
+        return `${this.name} announces to ${channel}, @channel standy times.`
     }
 
     debugsCode (student, subject) {
-        `${this.name} debugs ${student.name} code on ${subject}.`
+        return `${this.name} debugs ${student.name} code on ${subject}.`
     }
 }
 
+
+const dan = new Instructor ({
+    name: "Dan",
+    age: 30,
+    location: "Iowa",
+    specialty: "cat images",
+    favLanguage: "JavaScript",
+    catchPhrase: "Damn straight."
+})
+
+const jane = new Instructor ({
+    name: "Jane",
+    age: 26,
+    location: "Washington",
+    specialty: "Meme History",
+    favLanguage: "Python",
+    catchPhrase: "Let's git this bread."
+})
+
+const jamie = new ProjectManager ({
+    name: "Jamie",
+    age: 26,
+    location: "Washington",
+    specialty: "Meme History",
+    favLanguage: "Python",
+    catchPhrase: "Let's git this bread.",
+    gradClassName: '#web19',
+    favInstructor: 'Josh'
+})
+
+const jason = new ProjectManager ({
+    name: "Jason",
+    age: 22,
+    location: "Washington",
+    specialty: "Meme History",
+    favLanguage: "Python",
+    catchPhrase: "Let's git this bread.",
+    gradClassName: '#web19',
+    favInstructor: 'Josh'
+})
 
 const sam = new Student ({
     name: "Sam",
@@ -162,6 +202,8 @@ const winnieSong = new Student({
     favSubjects: ['CSS', 'HTML', 'LESS'],
 });
 
+console.log(devin.className);
+console.log(jane.demo('english'));
 
 
 // #### Stretch Problem
